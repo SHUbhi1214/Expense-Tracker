@@ -9,7 +9,7 @@ import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
 import uploadImage from '../../utils/uploadImage';
 import { useContext } from 'react';
-import { UserContext } from '../../context/userContext';
+import { UserContext } from '../../context/UserContext';
 
 
 const SignUp = () => {
