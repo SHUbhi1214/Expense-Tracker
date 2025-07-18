@@ -15,7 +15,6 @@ exports.getDashboardData=async(req,res) => {
         ]);
 
         console.log("totalIncome",{totalIncome,userId: isValidObjectId(userId)});
-
         const totalExpense =await Expense.aggregate([
             {$match: { userId:userObjectId}},
             {$group: { _id: null,total:{$sum: "$amount"}}},
@@ -32,7 +31,7 @@ exports.getDashboardData=async(req,res) => {
             (sum,transaction) => sum+transaction.amount,
             0
         );
-
+        
         //Get expense transactions in the last 30 days
         const last30DaysExpenseTransactions=await Expense.find({
             userId,
@@ -44,7 +43,6 @@ exports.getDashboardData=async(req,res) => {
             (sum,transaction) => sum+transaction.amount,
              0
         );
-
         //Fetch last 5 transactions(income+expenses)
         const lastTransactions = [
             ...(await Income.find({userId}).sort({date:-1}).limit(5)).map(
@@ -60,7 +58,6 @@ exports.getDashboardData=async(req,res) => {
                 })
             ),
         ].sort((a,b) => b.date-a.date);//sort latest first
-
         //Final Response
         res.json({
             totalBalance:

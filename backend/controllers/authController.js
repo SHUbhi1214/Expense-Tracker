@@ -18,7 +18,6 @@ exports.registerUser = async(req,res) => {
         if(existingUser){
             return res.status(400).json({message:"Email already in use"});
         }
-
         //create the user
         const user=await User.create({
             fullName,
@@ -37,7 +36,6 @@ exports.registerUser = async(req,res) => {
             .json({message:"Error registering user",error:err.message});
     }
 };
-
  //login user
 exports.loginUser = async(req,res) => {
     const {email,password}=req.body;
